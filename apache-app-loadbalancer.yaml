@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service #define the object
+metadata:
+  name: apache-app-loadbalancer
+spec:
+  type: LoadBalancer # We want LB, ClusterIP or NodePort
+  selector: # IMPORTANT THIS IS WHERE THE MAGIC HAPPENS!!!
+    app: apache # hey load balance accros any pod with tag app=apache
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 # backend port

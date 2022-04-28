@@ -1,0 +1,21 @@
+apiVersion: apps/v1  # Required and depends on the object
+kind: Deployment # Deployment object
+metadata:  # Describe the object or infra
+  name: apache-app-deployment #wtr
+  labels: #tag
+    app: apache
+spec:
+  replicas: 2 # Kinda autoscaling for pods REPLICASET OBJECT
+  selector:
+    matchLabels: # use to tag as a match maker
+      app: apache
+  template: # create a template for all the pod to be created
+    metadata:
+      labels:
+        app: apache # all new pods will be tagged with this label
+    spec: # containers inside the pods
+      containers: #define a list of containers!!!!
+      - name: apache-app
+        image: ken3791/apache_image_aprilwork:v3.0
+        ports:
+        - containerPort: 80 # port it will listen inside the container
